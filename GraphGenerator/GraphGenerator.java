@@ -1,3 +1,4 @@
+package GraphGenerator;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -149,6 +150,6 @@ public class GraphGenerator {
 
     public static void main(String[] args) throws IOException {
         GraphGenerator obj = new GraphGenerator();
-        obj.generateGeometricGraph(100, 0.3);
+        obj.generateGeometricGraph(100, 0.1);
     }
 }

@@ -1,4 +1,7 @@
+package DFSBasedLongestSimplePath;
 import java.util.LinkedList;
+
+import GraphGenerator.Graph;
 
 public class TestLCC {
     public static void main(String[] args) {
