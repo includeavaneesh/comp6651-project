@@ -5,7 +5,8 @@ import java.util.LinkedList;
 
 public class Graph {
 
-    public static LinkedList<Integer>[] readGraph(String filePath) {
+    @SuppressWarnings("unchecked")
+    public LinkedList<Integer>[] readGraph(String filePath) {
         LinkedList<Integer>[] adjacencyList = null;
         BufferedReader reader;
 
@@ -58,7 +59,7 @@ public class Graph {
         return adjacencyList;
     }
 
-    public static void printGraph(LinkedList<Integer>[] adjacencyList) {
+    public void printGraph(LinkedList<Integer>[] adjacencyList) {
         System.out.println("Graph adjacency list:");
         for (int i = 1; i < adjacencyList.length; i++) {
             System.out.print(i + " -> ");
@@ -71,12 +72,12 @@ public class Graph {
 
     public static void main(String[] args) {
         // Provide the path to the text file containing graph edges
-        String filePath = "./EDGES/test.EDGES";
+        // String filePath = "./EDGES/test.EDGES";
 
-        // Create adjacency list to store the graph
-        LinkedList<Integer>[] adjacencyList = readGraph(filePath);
+        // // Create adjacency list to store the graph
+        // LinkedList<Integer>[] adjacencyList = readGraph(filePath);
 
-        // Print adjacency list
-        printGraph(adjacencyList);
+        // // Print adjacency list
+        // printGraph(adjacencyList);
     }
 }

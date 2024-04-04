@@ -149,6 +149,6 @@ public class GraphGenerator {
 
     public static void main(String[] args) throws IOException {
         GraphGenerator obj = new GraphGenerator();
-        obj.generateGeometricGraph(10, 0.5);
+        obj.generateGeometricGraph(100, 0.3);
     }
 }
