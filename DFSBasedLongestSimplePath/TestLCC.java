@@ -1,7 +1,9 @@
 package DFSBasedLongestSimplePath;
+
 import java.util.LinkedList;
 
 import GraphGenerator.Graph;
+import GraphGenerator.LargestConnectedComponent;
 
 public class TestLCC {
     public static void main(String[] args) {
@@ -10,9 +12,12 @@ public class TestLCC {
         // Create adjacency list to store the graph
         LinkedList<Integer>[] adjacencyList = graph.readGraph(filePath);
 
-        LongestSimplePath lcc = new LongestSimplePath();
-        lcc.DFSLongestSimplePath(adjacencyList);
-        // DFS
-       
+        LargestConnectedComponent lcc = new LargestConnectedComponent();
+        LinkedList<Integer> largestComponent = lcc.largestConnectedComponent(adjacencyList);
+
+        LongestSimplePath dfsSimplePath = new LongestSimplePath();
+
+        dfsSimplePath.DFSLongestSimplePath(adjacencyList, largestComponent);
+
     }
 }

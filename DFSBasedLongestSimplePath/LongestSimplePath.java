@@ -1,11 +1,11 @@
 package DFSBasedLongestSimplePath;
+
 import java.util.LinkedList;
 import java.util.Random;
 import GraphGenerator.LargestConnectedComponent;
+
 public class LongestSimplePath {
-    public void DFSLongestSimplePath(LinkedList<Integer>[] adjacencyList) {
-        LargestConnectedComponent lcc = new LargestConnectedComponent();
-        LinkedList<Integer> largestComponent = lcc.largestConnectedComponent(adjacencyList);
+    public void DFSLongestSimplePath(LinkedList<Integer>[] adjacencyList, LinkedList<Integer> largestComponent) { 
 
         DFSLongestSimplePath dfs = new DFSLongestSimplePath();
 
@@ -24,9 +24,9 @@ public class LongestSimplePath {
             int depthV = dfs.DFS(vertexU, adjacencyList)[1];
             int depthW = dfs.DFS(vertexV, adjacencyList)[1];
 
-            maxPathLength = Math.max(maxPathLength, Math.max(depthV,depthW));
+            maxPathLength = Math.max(maxPathLength, Math.max(depthV, depthW));
         }
 
-        System.out.println("longest path: " + maxPathLength);
+        System.out.println("longest path by DFS based LSP: " + maxPathLength);
     }
 }

@@ -18,6 +18,6 @@ public class TestLCC {
         LongestSimplePath longestSimplePath = new LongestSimplePath();
         int longestSimplePathLength = longestSimplePath.dijkstraLongestSimplePath(adjacencyList, largestComponent);
 
-        System.out.println("longest path: " + longestSimplePathLength);
+        System.out.println("longest path by Dijkstra: " + longestSimplePathLength);
     }
 }
