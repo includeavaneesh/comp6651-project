@@ -1,7 +1,7 @@
 package DFSBasedLongestSimplePath;
 import java.util.LinkedList;
 import java.util.Random;
-
+import GraphGenerator.LargestConnectedComponent;
 public class LongestSimplePath {
     public void DFSLongestSimplePath(LinkedList<Integer>[] adjacencyList) {
         LargestConnectedComponent lcc = new LargestConnectedComponent();

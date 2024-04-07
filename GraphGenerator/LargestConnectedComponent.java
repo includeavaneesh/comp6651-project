@@ -1,4 +1,4 @@
-package DFSBasedLongestSimplePath;
+package GraphGenerator;
 
 import java.util.Iterator;
 import java.util.LinkedList;
