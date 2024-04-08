@@ -19,5 +19,6 @@ public class TestMetrics {
         System.out.println("|V_LCC|: " + evaluationMetrics.numberOfNodesInLCC(largestComponent));
         System.out.println("Delta V_LCC: " + evaluationMetrics.maxDegree(adjacencyList, largestComponent));
         System.out.println("kBar V_LCC: " + evaluationMetrics.averageDegree(adjacencyList, largestComponent));
+        // Add LSPcode according to use
     }
 }
