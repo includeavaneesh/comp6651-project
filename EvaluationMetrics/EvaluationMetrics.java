@@ -23,4 +23,12 @@ public class EvaluationMetrics {
         return maxDegree;
     }
 
+    public double averageDegree(LinkedList<Integer>[] graph, LinkedList<Integer> lccVertices) {
+        int degreeSum = 0;
+        for (int vertex : lccVertices)
+            degreeSum += graph[vertex].size();
+
+        return (double) (degreeSum / lccVertices.size());
+    }
+
 }
