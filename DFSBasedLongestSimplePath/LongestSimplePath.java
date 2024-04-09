@@ -5,7 +5,7 @@ import java.util.Random;
 import GraphGenerator.LargestConnectedComponent;
 
 public class LongestSimplePath {
-    public void DFSLongestSimplePath(LinkedList<Integer>[] adjacencyList, LinkedList<Integer> largestComponent) { 
+    public void DFSLongestSimplePath(LinkedList<Integer>[] adjacencyList, LinkedList<Integer> largestComponent) {
 
         DFSLongestSimplePath dfs = new DFSLongestSimplePath();
 
