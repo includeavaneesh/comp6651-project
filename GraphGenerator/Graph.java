@@ -2,10 +2,13 @@ package GraphGenerator;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Graph {
 
+	/*
+	 * Reads the graph and creates adjacency matrix of vertex ID
+	 */
     @SuppressWarnings("unchecked")
     public LinkedList<Integer>[] readGraph(String filePath) {
         LinkedList<Integer>[] adjacencyList = null;
@@ -14,15 +17,23 @@ public class Graph {
         try {
             reader = new BufferedReader(new FileReader(filePath));
             String line;
+            
+            // Use ArrayList to temporarily store edges
+            ArrayList<String[]> edgesList = new ArrayList<>();
+            
+            // Read edges and populate edgesList
+            while ((line = reader.readLine()) != null) {
+                String[] edge = line.trim().split("\\s+");
+                edgesList.add(edge);
+            }
 
             // Use HashSet to keep track of unique vertices
             // HashSet<Integer> verticesSet = new HashSet<>();
             int vertices = 0;
             // Read edges and populate verticesSet
-            while ((line = reader.readLine()) != null) {
-                String[] edge = line.trim().split("\\s+");
+            for  (String[] edge : edgesList) {
                 int vertex1 = Integer.parseInt(edge[0]);
-                int vertex2 = Integer.parseInt(edge[1]);
+                int vertex2 = Integer.parseInt(edge[3]);
 
                 vertices = Math.max(vertices, vertex1);
                 vertices = Math.max(vertices, vertex2);
@@ -30,6 +41,7 @@ public class Graph {
 
             // Determine the number of vertices
             int numVertices = vertices + 1;
+            System.out.println("number of vertices = " + numVertices);
             adjacencyList = new LinkedList[numVertices];
 
             // Initialize adjacency lists for each vertex
@@ -37,15 +49,10 @@ public class Graph {
                 adjacencyList[i] = new LinkedList<>();
             }
 
-            // Reset reader to read edges again from the beginning
-            reader.close();
-            reader = new BufferedReader(new FileReader(filePath));
-
             // Read edges and populate adjacency list
-            while ((line = reader.readLine()) != null) {
-                String[] edge = line.trim().split("\\s+");
+            for (String[] edge : edgesList) {
                 int vertex1 = Integer.parseInt(edge[0]);
-                int vertex2 = Integer.parseInt(edge[1]);
+                int vertex2 = Integer.parseInt(edge[3]);
 
                 // Assuming the graph is undirected
                 adjacencyList[vertex1].add(vertex2);
@@ -59,13 +66,88 @@ public class Graph {
 
         return adjacencyList;
     }
+    
+    /*
+	 * Reads the graph and creates adjacency matrix of vertex with all the details.
+	 * Ca be used for A* algorithm if position coordinate are required
+	 */
+    public LinkedList<Vertex>[] createAdjacencyMatrix(String filePath) {
+        LinkedList<Vertex>[] adjacencyList = null;
+        BufferedReader reader;
 
-    public void printGraph(LinkedList<Integer>[] adjacencyList) {
+        try {
+            reader = new BufferedReader(new FileReader(filePath));
+            String line;
+            
+            // Use ArrayList to temporarily store edges
+            ArrayList<String[]> edgesList = new ArrayList<>();
+            
+            // Use HashMap to store the mapping between vertex IDs and Vertex objects
+            HashMap<Integer, Vertex> vertexMap = new HashMap<>();
+            
+            int vertices = 0;
+            // Read edges and populate edgesList
+            while ((line = reader.readLine()) != null) {
+                String[] edge = line.trim().split("\\s+");
+                edgesList.add(edge);
+                
+                int vertex1 = Integer.parseInt(edge[0]);
+                int vertex2 = Integer.parseInt(edge[3]);
+                double x1 = Double.parseDouble(edge[1]);
+                double y1 = Double.parseDouble(edge[2]);
+                double x2 = Double.parseDouble(edge[4]);
+                double y2 = Double.parseDouble(edge[5]);
+                
+                if (!vertexMap.containsKey(vertex1)) {
+                    Vertex newVertex = new Vertex(vertex1, x1, y1);
+                    vertexMap.put(vertex1, newVertex);
+                }
+                
+                if (!vertexMap.containsKey(vertex2)) {
+                    Vertex newVertex = new Vertex(vertex2, x2, y2);
+                    vertexMap.put(vertex2, newVertex);
+                }
+                
+                vertices = Math.max(vertices, vertex1);
+                vertices = Math.max(vertices, vertex2);
+            }
+
+            // Determine the number of vertices
+            int numVertices = vertices + 1;
+            adjacencyList = new LinkedList[numVertices];
+
+            // Initialize adjacency lists for each vertex
+            for (int i = 1; i < numVertices; i++) {
+                adjacencyList[i] = new LinkedList<>();
+            }
+
+            // Read edges and populate adjacency list
+            for (String[] edge : edgesList) {
+            	int vertex1ID = Integer.parseInt(edge[0]);
+                int vertex2ID = Integer.parseInt(edge[3]);
+                
+                Vertex vertex1 = vertexMap.get(vertex1ID);
+                Vertex vertex2 = vertexMap.get(vertex2ID);
+
+                // Assuming the graph is undirected
+                adjacencyList[vertex1ID].add(vertex2);
+                adjacencyList[vertex2ID].add(vertex1);
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return adjacencyList;
+    }
+
+    public void printGraph(LinkedList<Vertex>[] adjacencyList) {
         System.out.println("Graph adjacency list:");
         for (int i = 1; i < adjacencyList.length; i++) {
             System.out.print(i + " -> ");
-            for (int j : adjacencyList[i]) {
-                System.out.print(j + " ");
+            for (Vertex vertex : adjacencyList[i]) {
+                System.out.print(vertex.id + " ");
             }
             System.out.println();
         }
@@ -73,12 +155,16 @@ public class Graph {
 
     public static void main(String[] args) {
         // Provide the path to the text file containing graph edges
-        // String filePath = "./EDGES/test.EDGES";
+         String filePath = "./EDGES/test.EDGES";
 
         // // Create adjacency list to store the graph
-        // LinkedList<Integer>[] adjacencyList = readGraph(filePath);
+         
+         Graph graph = new Graph();
+         // LinkedList<Integer>[] adjacencyList = graph.readGraph(filePath);
+         
+         LinkedList<Vertex>[] adjacencyList = graph.createAdjacencyMatrix(filePath);
 
         // // Print adjacency list
-        // printGraph(adjacencyList);
+         graph.printGraph(adjacencyList);
     }
 }
