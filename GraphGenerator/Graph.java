@@ -7,7 +7,8 @@ import java.util.*;
 public class Graph {
 	
 	/*
-	 * Reads graph and creates adjacency matrix of vertex ID
+	 * Reads graph and creates adjacency matrix of vertex ID.
+	 * When reading graph without coordinate information for vertex, set isGeometric to false
 	 */
     @SuppressWarnings("unchecked")
     public LinkedList<Integer>[] readGraph(String filePath, boolean isGeometric) {
