@@ -6,8 +6,8 @@ import GraphGenerator.Graph;
 import GraphGenerator.LargestConnectedComponent;
 
 public class TestLCC {
-	public static void main(String[] args) {
-        String filePath = "./EDGES/test.EDGES";
+    public static void main(String[] args) {
+        String filePath = "./EDGES/test2.EDGES";
         Graph graph = new Graph();
         // Create adjacency list to store the graph
         LinkedList<Integer>[] adjacencyList = graph.readGraph(filePath);

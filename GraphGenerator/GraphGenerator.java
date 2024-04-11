@@ -45,7 +45,7 @@ public class GraphGenerator {
     public void generateGeometricGraph(int n, double r) throws IOException {
     	ArrayList<Edges<Vertex>> edges = generateEdges(generateVertices(n), r);
 
-        try (BufferedWriter file = new BufferedWriter(new FileWriter("./EDGES/test.EDGES"))) {
+        try (BufferedWriter file = new BufferedWriter(new FileWriter("./EDGES/test2.EDGES"))) {
 
             for (Edges<Vertex> E : edges) {
                 Vertex u = E.getVertex1();
