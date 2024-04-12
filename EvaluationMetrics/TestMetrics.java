@@ -8,10 +8,10 @@ import GraphGenerator.LargestConnectedComponent;
 public class TestMetrics {
     public static void main(String[] args) {
         EvaluationMetrics evaluationMetrics = new EvaluationMetrics();
-        String filePath = "./EDGES/test2.edges";
+        String filePath = "./EDGES/inf-euroroad.edges";
         Graph graph = new Graph();
         // Create adjacency list to store the graph
-        LinkedList<Integer>[] adjacencyList = graph.readGraph(filePath);
+        LinkedList<Integer>[] adjacencyList = graph.readGraph(filePath, false);
 
         LargestConnectedComponent lcc = new LargestConnectedComponent();
         LinkedList<Integer> largestComponent = lcc.largestConnectedComponent(adjacencyList);
