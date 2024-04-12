@@ -5,12 +5,13 @@ import java.io.IOException;
 import java.util.*;
 
 public class Graph {
-
+	
 	/*
-	 * Reads the graph and creates adjacency matrix of vertex ID
+	 * Reads graph and creates adjacency matrix of vertex ID.
+	 * When reading graph without coordinate information for vertex, set isGeometric to false
 	 */
     @SuppressWarnings("unchecked")
-    public LinkedList<Integer>[] readGraph(String filePath) {
+    public LinkedList<Integer>[] readGraph(String filePath, boolean isGeometric) {
         LinkedList<Integer>[] adjacencyList = null;
         BufferedReader reader;
 
@@ -32,16 +33,21 @@ public class Graph {
             int vertices = 0;
             // Read edges and populate verticesSet
             for  (String[] edge : edgesList) {
-                int vertex1 = Integer.parseInt(edge[0]);
-                int vertex2 = Integer.parseInt(edge[3]);
-
+            	int vertex1, vertex2;
+            	if (isGeometric) {
+            		vertex1 = Integer.parseInt(edge[0]);
+                    vertex2 = Integer.parseInt(edge[3]);
+            	}
+            	else {
+            		vertex1 = Integer.parseInt(edge[0]);
+                    vertex2 = Integer.parseInt(edge[1]);
+            	}               
                 vertices = Math.max(vertices, vertex1);
                 vertices = Math.max(vertices, vertex2);
             }
 
             // Determine the number of vertices
             int numVertices = vertices + 1;
-            System.out.println("number of vertices = " + numVertices);
             adjacencyList = new LinkedList[numVertices];
 
             // Initialize adjacency lists for each vertex
@@ -51,8 +57,15 @@ public class Graph {
 
             // Read edges and populate adjacency list
             for (String[] edge : edgesList) {
-                int vertex1 = Integer.parseInt(edge[0]);
-                int vertex2 = Integer.parseInt(edge[3]);
+            	int vertex1, vertex2;
+            	if (isGeometric) {
+            		vertex1 = Integer.parseInt(edge[0]);
+                    vertex2 = Integer.parseInt(edge[3]);
+            	}
+            	else {
+            		vertex1 = Integer.parseInt(edge[0]);
+                    vertex2 = Integer.parseInt(edge[1]);
+            	} 
 
                 // Assuming the graph is undirected
                 adjacencyList[vertex1].add(vertex2);
@@ -69,9 +82,10 @@ public class Graph {
     
     /*
 	 * Reads the graph and creates adjacency matrix of vertex with all the details.
-	 * Ca be used for A* algorithm if position coordinate are required
+	 * Can be used for A* algorithm if position coordinate are required
 	 */
-    public LinkedList<Vertex>[] createAdjacencyMatrix(String filePath) {
+    @SuppressWarnings("unchecked")
+    public LinkedList<Vertex>[] readGeometricGraphWithCoordinates(String filePath) {
         LinkedList<Vertex>[] adjacencyList = null;
         BufferedReader reader;
 
@@ -155,14 +169,14 @@ public class Graph {
 
     public static void main(String[] args) {
         // Provide the path to the text file containing graph edges
-         String filePath = "./EDGES/test.EDGES";
+         String filePath = "./EDGES/graph_300Nodes.EDGES";
 
         // // Create adjacency list to store the graph
          
          Graph graph = new Graph();
-         // LinkedList<Integer>[] adjacencyList = graph.readGraph(filePath);
+         // LinkedList<Integer>[] adjacencyList = graph.readGraph(filePath, true);
          
-         LinkedList<Vertex>[] adjacencyList = graph.createAdjacencyMatrix(filePath);
+         LinkedList<Vertex>[] adjacencyList = graph.readGeometricGraphWithCoordinates(filePath);
 
         // // Print adjacency list
          graph.printGraph(adjacencyList);
