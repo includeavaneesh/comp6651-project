@@ -96,18 +96,19 @@ public class AStarLongestSimplePath {
             for (int i = 0; i < adjacencyLinkedListsWithHeuristic[currentVertex.id].size(); i++) {
                 GeometricVertex neighbor = adjacencyLinkedListsWithHeuristic[currentVertex.id].get(i);
 
-                if (dist[currentVertex.id] + 1 > dist[neighbor.id]) {
-                    dist[neighbor.id] = dist[uId] + 1;
-                    neighbor.d = currentVertex.d + 1;
-                    neighbor.f = currentVertex.d + neighbor.h;
+                if (dist[currentVertex.id] + 1 > neighbor.h) {
+                    dist[neighbor.id] = dist[currentVertex.id] + 1;
 
                     if (dist[neighbor.id] > longestPath) {
                         longestPath = dist[neighbor.id];
                     }
                     if (S.contains(neighbor)) {
                         S.remove(neighbor);
+                        maxHeap.add(neighbor);
+                    } else {
+                        neighbor.f = dist[neighbor.id];
+                        maxHeap.add(neighbor);
                     }
-                    maxHeap.add(neighbor);
                 }
             }
         }
