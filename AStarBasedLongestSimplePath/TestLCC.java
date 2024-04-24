@@ -20,6 +20,6 @@ public class TestLCC {
         LongestSimplePath longestSimplePath = new LongestSimplePath();
         int longestSimplePathLength = longestSimplePath.astartLongestSimplePath(adjacencyList, largestComponent);
 
-        System.out.println("longest path by AStar: " + longestSimplePathLength);
+        System.out.println("longest path by Astar: " + longestSimplePathLength);
     }
 }

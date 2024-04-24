@@ -84,10 +84,6 @@ public class AStarLongestSimplePath {
             S.add(currentVertex);
             int uId = currentVertex.id;
 
-            if (currentVertex == destination) {
-                break;
-            }
-
             if (visited[uId])
                 continue;
 
