@@ -7,10 +7,10 @@ import GraphGenerator.LargestConnectedComponent;
 
 public class TestLCC {
     public static void main(String[] args) {
-        String filePath = "./EDGES/graph_300Nodes.EDGES";
+        String filePath = "./EDGES/inf-euroroad.edges";
         Graph graph = new Graph();
         // Create adjacency list to store the graph
-        LinkedList<Integer>[] adjacencyList = graph.readGraph(filePath, true);
+        LinkedList<Integer>[] adjacencyList = graph.readGraph(filePath, false);
 
         LargestConnectedComponent lcc = new LargestConnectedComponent();
         LinkedList<Integer> largestComponent = lcc.largestConnectedComponent(adjacencyList);
